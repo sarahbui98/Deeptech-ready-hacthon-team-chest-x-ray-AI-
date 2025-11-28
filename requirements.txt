@@ -8,7 +8,7 @@ tensorflow==2.18.0
 numpy==1.26.1
 
 # OpenCV for image processing
-opencv-python==4.8.1.78
+opencv-python-headless==4.8.1.78
 
 # Pillow for image loading
 Pillow==10.0.0
