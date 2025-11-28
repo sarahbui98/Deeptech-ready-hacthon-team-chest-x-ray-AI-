@@ -10,35 +10,29 @@ import time
 # ------------------------------
 # Google Drive Model Settings
 # ------------------------------
-import os
-import streamlit as st
-import tensorflow as tf
-import gdown
+# Model setup
+# -----------------------------
+MODEL_URL = "https://drive.google.com/uc?id=1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq"
+MODEL_PATH = "assets/model.h5"  # it will be saved in assets folder
 
-MODEL_URL = "https://drive.google.com/uc?id=1gzOhv1qfBwTto2hNkVnFHyiK3tLWsCoV"
-MODEL_PATH = "model.keras"
+# Ensure the assets folder exists
+os.makedirs("assets", exist_ok=True)
 
-# Download the model if not already present
+# Download the model if it doesn't exist
 if not os.path.exists(MODEL_PATH):
-    st.info("Downloading model from Google Drive...")
+    st.info("Downloading model from Google Drive... (this may take a while)")
     try:
-        gdown.download(MODEL_URL, MODEL_PATH, quiet=False, fuzzy=True)
-        if os.path.exists(MODEL_PATH):
-            st.success("Model downloaded successfully!")
-        else:
-            st.error("Download finished but model file not found.")
+        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+        st.success("Model downloaded successfully!")
     except Exception as e:
         st.error(f"Failed to download model: {e}")
 
 # Load the Keras model
-if os.path.exists(MODEL_PATH):
-    try:
-        model = tf.keras.models.load_model(MODEL_PATH)
-        st.success("Model loaded successfully!")
-    except Exception as e:
-        st.error(f"Failed to load model: {e}")
-else:
-    st.error("Model file not found. Cannot load the model.")
+try:
+    model = tf.keras.models.load_model(MODEL_PATH)
+    st.success("Model loaded successfully!")
+except Exception as e:
+    st.error(f"Failed to load model: {e}")
 
 
 # ------------------------------
