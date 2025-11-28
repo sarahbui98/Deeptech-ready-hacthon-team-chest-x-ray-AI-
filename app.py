@@ -8,22 +8,29 @@ import cv2
 import time
 
 # ------------------------------
-# Google Drive Model Settings
-# ------------------------------
-# Model setup
-# -----------------------------
+import os
+import streamlit as st
+import tensorflow as tf
+import gdown
+
+# Model URL and path
 MODEL_URL = "https://drive.google.com/uc?id=1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq"
-MODEL_PATH = "assets/model.h5"  # it will be saved in assets folder
+MODEL_PATH = "assets/model.h5"
 
-# Ensure the assets folder exists
-os.makedirs("assets", exist_ok=True)
+# Ensure assets folder exists
+if not os.path.exists("assets"):
+    os.makedirs("assets")  # <-- Create the folder if missing
 
-# Download the model if it doesn't exist
+# Download model if not present
 if not os.path.exists(MODEL_PATH):
     st.info("Downloading model from Google Drive... (this may take a while)")
     try:
-        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
-        st.success("Model downloaded successfully!")
+        # gdown.download returns the path to the downloaded file
+        downloaded_path = gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
+        if downloaded_path is None:
+            st.error("Download failed! Check the Google Drive link or permissions.")
+        else:
+            st.success(f"Model downloaded successfully to {downloaded_path}")
     except Exception as e:
         st.error(f"Failed to download model: {e}")
 
