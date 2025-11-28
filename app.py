@@ -26,18 +26,13 @@ st.sidebar.write("🌍 *Nigeria Hackathon 2025*")
 MODEL_URL = "https://drive.google.com/uc?id=1gzOhv1qfBwTto2hNkVnFHyiK3tLWsCoV"
 MODEL_PATH = "model.keras"
 
+# Download model only if not already downloaded
 if not os.path.exists(MODEL_PATH):
-    with st.spinner("⬇️ Downloading AI model... please wait"):
-        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
-        st.success("✅ Model downloaded successfully!")
+    gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
 
-# Verify model exists
-if os.path.exists(MODEL_PATH):
-    st.write("Model exists:", True)
-    st.write("File size (MB):", os.path.getsize(MODEL_PATH)/1e6)
-else:
-    st.error("❌ Model failed to download!")
-    st.stop()
+
+
+
 
 # =====================
 # Load Model Safely
