@@ -10,6 +10,11 @@ import time
 # ------------------------------
 # Google Drive Model Settings
 # ------------------------------
+import os
+import streamlit as st
+import tensorflow as tf
+import gdown
+
 MODEL_URL = "https://drive.google.com/uc?id=1gzOhv1qfBwTto2hNkVnFHyiK3tLWsCoV"
 MODEL_PATH = "model.keras"
 
@@ -17,17 +22,24 @@ MODEL_PATH = "model.keras"
 if not os.path.exists(MODEL_PATH):
     st.info("Downloading model from Google Drive...")
     try:
-        gdown.download(MODEL_URL, MODEL_PATH, quiet=False)
-        st.success("Model downloaded successfully!")
+        gdown.download(MODEL_URL, MODEL_PATH, quiet=False, fuzzy=True)
+        if os.path.exists(MODEL_PATH):
+            st.success("Model downloaded successfully!")
+        else:
+            st.error("Download finished but model file not found.")
     except Exception as e:
         st.error(f"Failed to download model: {e}")
 
 # Load the Keras model
-try:
-    model = tf.keras.models.load_model(MODEL_PATH)
-    st.success("Model loaded successfully!")
-except Exception as e:
-    st.error(f"Failed to load model: {e}")
+if os.path.exists(MODEL_PATH):
+    try:
+        model = tf.keras.models.load_model(MODEL_PATH)
+        st.success("Model loaded successfully!")
+    except Exception as e:
+        st.error(f"Failed to load model: {e}")
+else:
+    st.error("Model file not found. Cannot load the model.")
+
 
 # ------------------------------
 # Streamlit App Interface
