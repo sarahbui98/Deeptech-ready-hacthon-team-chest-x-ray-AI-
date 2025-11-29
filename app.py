@@ -39,27 +39,52 @@ except Exception as e:
 # ------------------------------
 # Streamlit App Interface
 # ------------------------------
-st.title("Chest X-Ray AI")
-st.write("Upload an X-Ray image for classification.")
+st.title("DeepTech Chest-Xray AI 🩺 (SVD + XAI)")
+uploaded = st.file_uploader("Upload Lung X-ray", ["png","jpg","jpeg"])
 
-uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+if uploaded:
+    # Load image and preprocess
+    img = Image.open(uploaded).convert("L")
+    img = np.array(img)
+    img = cv2.resize(img, (224,224))
+    img_svd = apply_svd(img, k=40)
 
-if uploaded_file is not None:
-    # Read image
-    image = Image.open(uploaded_file).convert("RGB")
-    st.image(image, caption="Uploaded Image", use_column_width=True)
-    
-    # Preprocess image
-    img = np.array(image)
-    img = cv2.resize(img, (224, 224))  # adjust size as per your model input
-    img = img / 255.0  # normalize
-    img = np.expand_dims(img, axis=0)
-    
-    # Make prediction
-    if 'model' in locals():
-        with st.spinner("Predicting..."):
-            prediction = model.predict(img)
-            st.write(f"Prediction: {prediction}")
-    else:
-        st.error("Model is not loaded yet.")
+    x_input = img_svd.astype(np.float32)/255.0
+    x_input = np.expand_dims(x_input, (0,-1))
 
+    # Model prediction
+    pred = model.predict(x_input)[0]
+    class_idx = int(pred.argmax())
+    confidence = float(pred.max())
+    pred_label = labels[class_idx]
+
+    # Display images
+    st.image(img, caption="Original Image", use_container_width=True)
+    st.image(img_svd, caption="SVD Processed", use_container_width=True)
+
+    # Colored prediction box
+    st.markdown(f"<h2 style='color:{colors[pred_label]};'>Prediction: {pred_label}</h2>", unsafe_allow_html=True)
+
+    # Confidence Bar
+    st.write("**Confidence:**")
+    st.progress(confidence)
+
+    # Confetti if Normal
+    if pred_label == "Normal":
+        st.balloons()
+
+
+    # Chatbox: Explain AI result
+
+    st.write("### 💬 Explain result ")
+    if st.button("Explain AI Decision"):
+        with st.spinner("AI is analyzing the scan..."):
+            time.sleep(1.5)
+        simple_exp = (
+            f"The AI predicts **{pred_label}** "
+            f"with **{confidence*100:.1f}% confidence**.\n\n"
+            "The image was compressed using **SVD** to focus on key patterns. "
+            "A CNN then analyzed the lungs for infection signs. \n\n"
+            "⚠️ This is AI interpretation only and not medical advice."
+        )
+        st.write(simple_exp)
