@@ -17,7 +17,7 @@ import gdown
 os.makedirs("assets", exist_ok=True)
 
 # Google Drive file URL
-MODEL_URL = "https://drive.google.com/uc?id=1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq"
+MODEL_URL = "https://drive.google.com/file/d/1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq/view?usp=sharing"
 MODEL_PATH = "assets/model.h5"
 
 # Download the model if not already present
