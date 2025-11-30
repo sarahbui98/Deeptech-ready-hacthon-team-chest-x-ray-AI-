@@ -15,12 +15,11 @@ MODEL_URL = "https://drive.google.com/uc?id=1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq"
 MODEL_PATH = "assets/model.h5"
 
 # Class labels used by the model (ADDED)
-labels = ["COVID", "PNEUMONIA", "Normal"]
+labels = ["PNEUMONIA", "Normal"]
 
 # UI Colors for display (ADDED)
 colors = {
-    "COVID": "red",
-    "PNEUMONIA": "orange",
+    "PNEUMONIA": "red",
     "Normal": "green"
 }
 
