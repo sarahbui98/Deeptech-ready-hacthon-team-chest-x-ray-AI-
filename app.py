@@ -7,18 +7,35 @@ import numpy as np
 import cv2
 import time
 
-# ------------------------------
-import os
-import streamlit as st
-import tensorflow as tf
-import gdown
-
 # Make sure the assets folder exists
 os.makedirs("assets", exist_ok=True)
 
-# Google Drive file URL
-MODEL_URL = "https://drive.google.com/file/d/1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq/view?usp=sharing"
+# Google Drive direct download link (CORRECTED)
+MODEL_URL = "https://drive.google.com/uc?id=1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq"
 MODEL_PATH = "assets/model.h5"
+
+# Class labels used by the model (ADDED)
+labels = ["COVID", "PNEUMONIA", "Normal"]
+
+# UI Colors for display (ADDED)
+colors = {
+    "COVID": "red",
+    "PNEUMONIA": "orange",
+    "Normal": "green"
+}
+
+# ------------------------------
+# SVD Image Compression Function (ADDED)
+# ------------------------------
+def apply_svd(image, k=40):
+    """ Apply Truncated SVD to 2D gray image and reconstruct it """
+    img = image.astype(np.float32)
+    U, S, Vt = np.linalg.svd(img, full_matrices=False)
+    U_k = U[:, :k]
+    S_k = S[:k]
+    Vt_k = Vt[:k, :]
+    img_reconstructed = np.dot(U_k, np.dot(np.diag(S_k), Vt_k))
+    return img_reconstructed
 
 # Download the model if not already present
 if not os.path.exists(MODEL_PATH):
@@ -62,20 +79,21 @@ if uploaded:
     st.image(img, caption="Original Image", use_container_width=True)
     st.image(img_svd, caption="SVD Processed", use_container_width=True)
 
-    # Colored prediction box
-    st.markdown(f"<h2 style='color:{colors[pred_label]};'>Prediction: {pred_label}</h2>", unsafe_allow_html=True)
+    # Colored prediction
+    st.markdown(
+        f"<h2 style='color:{colors[pred_label]};'>Prediction: {pred_label}</h2>",
+        unsafe_allow_html=True
+    )
 
-    # Confidence Bar
+    # Confidence bar
     st.write("**Confidence:**")
     st.progress(confidence)
 
-    # Confetti if Normal
+    # Balloons if Normal
     if pred_label == "Normal":
         st.balloons()
 
-
-    # Chatbox: Explain AI result
-
+    # Explanation button
     st.write("### 💬 Explain result ")
     if st.button("Explain AI Decision"):
         with st.spinner("AI is analyzing the scan..."):
