@@ -10,9 +10,16 @@ import time
 # Make sure the assets folder exists
 os.makedirs("assets", exist_ok=True)
 
-# Google Drive direct download link (CORRECTED)
-MODEL_URL = "https://drive.google.com/uc?id=1tcoQNo6PXNQR_vCkDJWoB5QcR6PDQgvq"
+
 MODEL_PATH = "assets/model.h5"
+
+# Load the Keras model
+try:
+    model = tf.keras.models.load_model(MODEL_PATH)
+    st.success("Model loaded successfully!")
+except Exception as e:
+    st.error(f"Failed to load model: {e}")
+
 
 # Class labels used by the model (ADDED)
 labels = ["PNEUMONIA", "Normal"]
