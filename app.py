@@ -7,12 +7,6 @@ import numpy as np
 import cv2
 import time
 
-import streamlit as st
-import tensorflow as tf
-from PIL import Image
-import numpy as np
-import cv2
-import time
 
 # ------------------------------
 # Sidebar: Team Info
