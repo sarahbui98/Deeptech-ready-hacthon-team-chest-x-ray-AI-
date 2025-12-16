@@ -1,7 +1,7 @@
 # Chest X-ray AI 🩺 (SVD + CNN + XAI)
+<img width="945" height="345" alt="image" src="https://github.com/user-attachments/assets/c22546cf-5c6e-4dad-9b2b-936e079f22b1" />
 
-**Team Name:** Chest X-ray AI   
-**Track:** Health & Public Safety  
+  
 ---
 ## Overview
 This project is an AI-powered tool for detecting pneumonia from chest X-ray images.  
