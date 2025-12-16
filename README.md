@@ -14,9 +14,6 @@ A simple explainable AI (XAI) component gives users a layman-friendly interpreta
 - Confidence score of the prediction  
 - Layman explanation with one-click chatbox
 ---
-## project links
-Deployed demo https://dmcoftvtnj8gtvqeerdlx2.streamlit.app/
-Youtube video https://youtu.be/zqI75rUST8E?si=P5rdJJuOm6pxGVsJ
 
 # Install dependencies
 pip install -r requirements.txt
