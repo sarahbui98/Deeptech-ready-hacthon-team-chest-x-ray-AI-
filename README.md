@@ -12,10 +12,10 @@ We apply **Singular Value Decomposition (SVD)** as preprocessing to compress ima
 To develop an automated system for detecting pneumonia from chest X-ray images using deep learning,
 To improve diagnostic speed and consistency compared to manual interpretation,
 To evaluate the effectiveness of a CNN-based classification model
-# Dataset preparation
+## Dataset preparation
 open source chest x-ray dataset was used to train the model,data was split into 80% for training and 20% for testing,all images were resized and normalised
 
-# Sample image from the dataset
+## Sample image from the dataset
 
 ![person325_bacteria_1501](https://github.com/user-attachments/assets/e013b173-ec4e-4938-9322-80b537a5a11c)
 
@@ -43,5 +43,5 @@ Confusion matrix
 
 ---
 
-# Install dependencies
+## Install dependencies
 pip install -r requirements.txt
