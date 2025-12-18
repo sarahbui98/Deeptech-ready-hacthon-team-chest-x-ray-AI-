@@ -8,11 +8,15 @@
 This project is an AI-powered tool for detecting pneumonia from chest X-ray images.  
 We apply **Singular Value Decomposition (SVD)** as preprocessing to compress images, then classify using a **Convolutional Neural Network (CNN)**.  
 A simple explainable AI (XAI) component gives users a layman-friendly interpretation of the results.
----
+
 ## Objectives of the Project:
 To develop an automated system for detecting pneumonia from chest X-ray images using deep learning,
 To improve diagnostic speed and consistency compared to manual interpretation,
 To evaluate the effectiveness of a CNN-based classification model
+# Dataset preparation
+open source chest x-ray daset was was used to train the model,80% for training,20% for testing,all images were resized and normalised
+![person325_bacteria_1501](https://github.com/user-attachments/assets/e013b173-ec4e-4938-9322-80b537a5a11c)
+
 ## Model Training 
 Input Size: 224 × 224 grayscale chest X-ray images,
 Three convolutional layers with  ReLu activation function,
@@ -34,7 +38,10 @@ Confusion matrix
 - Upload chest X-ray images (`.png`, `.jpg`, `.jpeg`)  
 - AI prediction: Normal vs Pneumonia  
 - Confidence score of the prediction  
-- Layman explanation with one-click chatbox
+#This project is an AI-powered tool for detecting pneumonia from chest X-ray images.  
+We apply **Singular Value Decomposition (SVD)** as preprocessing to compress images, then classify using a **Convolutional Neural Network (CNN)**.  
+A simple explainable AI (XAI) component gives users a layman-friendly interpretation of the results.
+
 ---
 
 # Install dependencies
