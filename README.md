@@ -14,7 +14,8 @@ To develop an automated system for detecting pneumonia from chest X-ray images u
 To improve diagnostic speed and consistency compared to manual interpretation,
 To evaluate the effectiveness of a CNN-based classification model
 # Dataset preparation
-open source chest x-ray daset was was used to train the model,80% for training,20% for testing,all images were resized and normalised
+open source chest x-ray dataset was used to train the model,data was split into 80% for training and 20% for testing,all images were resized and normalised
+
 ![person325_bacteria_1501](https://github.com/user-attachments/assets/e013b173-ec4e-4938-9322-80b537a5a11c)
 
 ## Model Training 
