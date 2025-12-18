@@ -1,4 +1,4 @@
-# Chest X-ray AI 🩺 
+# Pneumonia detection using chest x-ray images 
 <img width="960" height="375" alt="image" src="https://github.com/user-attachments/assets/b50ab192-d3b7-4554-b305-e7f1b8303bd8" />
 
 
