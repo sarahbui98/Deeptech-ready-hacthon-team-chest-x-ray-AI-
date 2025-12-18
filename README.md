@@ -40,9 +40,6 @@ Confusion matrix
 - Upload chest X-ray images (`.png`, `.jpg`, `.jpeg`)  
 - AI prediction: Normal vs Pneumonia  
 - Confidence score of the prediction  
-#This project is an AI-powered tool for detecting pneumonia from chest X-ray images.  
-We apply **Singular Value Decomposition (SVD)** as preprocessing to compress images, then classify using a **Convolutional Neural Network (CNN)**.  
-A simple explainable AI (XAI) component gives users a layman-friendly interpretation of the results.
 
 ---
 
